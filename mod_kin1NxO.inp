@@ -241,49 +241,73 @@ $ kVT01_O2O  = kVT10_O2O  * QvibO2
 #--------------------------------------------------------------------------------
 
 # The following section was modified to ungroup the reactions
-e + N2 => e + N2(A)                               !   BOLSIG N2 -> N2(A3,v0-4)
-e + N2 => e + N2(A)                               !   BOLSIG N2 -> N2(A3,v5-9)
-e + N2 => e + N2(A)                               !   BOLSIG N2 -> N2(A3,v10-)
+# Previous Reaction: N2 -> N2(A3,v0-4)
+e + N2 => e + N2(A)                               ! 1.7688d-13*Te**(7.0409d-1)*exp(-7.5870d4/Te)
+# Previous Reaction: N2 -> N2(A3,v5-9)
+e + N2 => e + N2(A)                               ! 7.9693d-12*Te**(4.9850d-1)*exp(-8.5870d4/Te)
+# Previous Reaction: N2 -> N2(A3,v10-)
+e + N2 => e + N2(A)                               ! 4.9154d-11*Te**(3.4551d-1)*exp(-9.7515d4/Te)
 
 # The following section was modified to ungroup the reactions
-e + N2 => e + N2(B)                               !   BOLSIG N2 -> N2(B3)
-e + N2 => e + N2(B)                               !   BOLSIG N2 -> N2(W3)
-e + N2 => e + N2(B)                               !   BOLSIG N2 -> N2(B`3)
+# Previous Reaction: N2 -> N2(B3)
+e + N2 => e + N2(B)                               ! 4.7423d-10*Te**(2.4299d-1)*exp(-8.9373d4/Te)
+# Previous Reaction: N2 -> N2(W3)
+e + N2 => e + N2(B)                               ! 2.9941d-11*Te**(4.9367d-1)*exp(-9.4056d4/Te)
+# Previous Reaction: N2 -> N2(B`3)
+e + N2 => e + N2(B)                               ! 8.8063d-12*Te**(5.1422d-1)*exp(-9.7818d4/Te)
 
 # The following section was modified to ungroup the reactions
-e + N2 => e + N2(a`1)                              !   BOLSIG N2 -> N2(a`1)
-e + N2 => e + N2(a`1)                              !   BOLSIG N2 -> N2(a1)
-e + N2 => e + N2(a`1)                              !   BOLSIG N2 -> N2(w1)
+# Previous Reaction: N2 -> N2(a`1)
+e + N2 => e + N2(a`1)                              ! 2.9992d-12*Te**(5.6350d-1)*exp(-9.5904d4/Te)
+# Previous Reaction: N2 -> N2(a1)
+e + N2 => e + N2(a`1)                              ! 5.5887d-11*Te**(3.5201d-1)*exp(-9.5025d4/Te)
+# Previous Reaction: N2 -> N2(w1)
+e + N2 => e + N2(a`1)                              ! 2.4155d-12*Te**(7.1066d-1)*exp(-1.0510d5/Te)
 
 # The following section was modified to ungroup the reactions
-e + N2 => e + N2(C3)                               !   BOLSIG N2 -> N2(C3)
-e + N2 => e + N2(C3)                               !   BOLSIG N2 -> N2(E3)
+# Previous Reaction: N2 -> N2(C3)
+e + N2 => e + N2(C3)                               ! 1.5973d-9*Te**(2.5741d-1)*exp(-1.3419d5/Te)
+# Previous Reaction: N2 -> N2(E3)
+e + N2 => e + N2(C3)                               ! 1.0887d-8*Te**(-3.3612d-1)*exp(-1.2302d5/Te)
     
 # N2(a''1)
 
-e + N2 => e + N + N(2D)                            !   BOLSIG N2 -> N2(SUM)
+# Previous Reaction: N2 -> N2(SUM)
+e + N2 => e + N + N(2D)                            ! 7.6595d-11*Te**(5.4112d-1)*exp(-1.5492d5/Te)
 
 # The following section was modified to ungroup the reactions
-e + O2 => e + O2(a1D)                                   !   BOLSIG O2 -> O2(a1D)
-e + O2 => e + O2(b1)                                   !   BOLSIG O2 -> O2(b1)
-e + O2 => e + O2(4.5eV)                                   !   BOLSIG O2 -> O2(4.5eV)
+# Previous Reaction: O2 -> O2(a1D)
+e + O2 => e + O2(a1D)                                   ! 4.8218d-13*Te**(7.1499d-1)*exp(-1.4253d4/Te)
+# Previous Reaction: O2 -> O2(b1)
+e + O2 => e + O2(b1)                                   ! 9.9768d-15*Te**(1.0125d0)*exp(-1.7154d4/Te)
+# Previous Reaction: O2 -> O2(4.5eV)
+e + O2 => e + O2(4.5eV)                                   ! 2.1337d-5*Te**(-8.5151d-1)*exp(-7.2464d4/Te)
 
 # The following section was modified to ungroup the reactions
-e + O2 => e + O + O                               !   BOLSIG O2 -> O2(6.0eV)
-e + O2 => e + O + O(1D)                               !   BOLSIG O2 -> O2(8.4eV)
-e + O2 => e + O + O(1S)                               !   BOLSIG O2 -> O2(9.97eV)
-e + O2 => e + O + O(3p3p)                               !   BOLSIG O2 -> O(3p3p)
-e + O2 => e + O + O(3p5p)                               !   BOLSIG O2 -> O(3p5p)
+# Previous Reaction: O2 -> O2(6.0eV)
+e + O2 => e + O + O                               ! 8.5007d-11*Te**(4.6382d-1)*exp(-6.6482d4/Te)
+# Previous Reaction: O2 -> O2(8.4eV)
+e + O2 => e + O + O(1D)                               ! 4.3309d-1*Te**(-1.4388d0)*exp(-1.0774d5/Te)
+# Previous Reaction: O2 -> O2(9.97eV)
+e + O2 => e + O + O(1S)                               ! 1.0922d-11*Te**(3.7536d-1)*exp(-1.1262d5/Te)
+# Previous Reaction: O2 -> O(3p3p)
+e + O2 => e + O + O(3p3p)                               ! 4.3076d-12*Te**(2.9556d-1)*exp(-1.8575d5/Te)
+# Previous Reaction: O2 -> O(3p5p)
+e + O2 => e + O + O(3p5p)                               ! 5.3008d-12*Te**(4.2266d-1)*exp(-1.8381d5/Te)
 
 #e + O2(a1D) => e + O + O                            !   BOLSIG O2(a1D) -> O + O
 
-e + O => e + O(1D)                                 !   BOLSIG O -> O(1D)
+# Previous Reaction: O -> O(1D)
+e + O => e + O(1D)                                 ! 8.2377d-14*Te**(1.1400d0)*exp(-2.1543d4/Te)
 
-e + O => e + O(1S)                                 !   BOLSIG O -> O(1S)
+# Previous Reaction: O -> O(1S)
+e + O => e + O(1S)                                 ! 1.9895d-12*Te**(5.6009d-1)*exp(-4.9217d4/Te)
 
-e + O => e + O(3p3p)                                 !   BOLSIG O -> O(3p3p)
+# Previous Reaction: O -> O(3p3p)
+e + O => e + O(3p3p)                                 ! 3.1698d-11*Te**(4.4555d-1)*exp(-1.2810d5/Te)
 
-e + O => e + O(3p5p)                                 !   BOLSIG O -> O(3p5p)
+# Previous Reaction: O -> O(3p5p)
+e + O => e + O(3p5p)                                 ! 2.1709d-11*Te**(4.0838d-1)*exp(-1.2644d5/Te)
 
 e + O(1S) => e + O(3p3P)                                 !  4.83d-10
 e + O(1D) => e + O(3p3P)                                 !  6.72d-12
@@ -311,16 +335,22 @@ e + O3 => e + O2 + O										! 100 * (exp(-7.9-134/EN) + exp(-8-169/EN) + exp(-
 #
 #--------------------------------------------------------------------------------
 
-e + N      => e + e + N^+                          !   BOLSIG N      -> N^+
-e + O      => e + e + O^+                          !   BOLSIG O      -> O^+
+# Previous Reaction: N -> N^+
+e + N      => e + e + N^+                          ! 1.2498d-9*Te**(3.4639d-1)*exp(-2.4787d5/Te)
+# Previous Reaction: O -> O^+
+e + O      => e + e + O^+                          ! 3.1574d-12*Te**(1.0048d0)*exp(-1.5302d5/Te)
 
-e + N2     => e + e + N2^+                         !   BOLSIG N2     -> N2^+
+# Previous Reaction: N2 -> N2^+
+e + N2     => e + e + N2^+                         ! 2.5980d-11*Te**(5.7886d-1)*exp(-1.8153d5/Te)
 #e + N2(A) => e + e + N2^+                         !   BOLSIG N2(A3) -> N2^+
-e + O2     => e + e + O2^+                         !   BOLSIG O2     -> O2^+
-e + O2(a1D) => e + e + O2^+                         !   BOLSIG O2(a1D) -> O2^+
+# Previous Reaction: O2 -> O2^+
+e + O2     => e + e + O2^+                         ! 9.3408d-12*Te**(5.8049d-1)*exp(-1.3742d5/Te)
+# Previous Reaction: O2(a1D) -> O2^+
+e + O2(a1D) => e + e + O2^+                         ! 5.1101d-11*Te**(5.9447d-1)*exp(-1.2357d5/Te)
 #e + NO     => e + e + NO^+                         !   BOLSIG NO     -> NO^+
 
-e + N2O    => e + e + N2O^+                        !   BOLSIG N2O    -> N2O^+
+# Previous Reaction: N2O -> N2O^+
+e + N2O    => e + e + N2O^+                        ! 5.5468d-12*Te**(7.0568d-1)*exp(-1.4588d5/Te)
 
 # missing cross sections
 #e + NO2   => e + e + NO2^+                        !   BOLSIG NO2    -> NO2^+
@@ -375,10 +405,14 @@ e + @A + ANY_NEUTRAL => @B + ANY_NEUTRAL           !   6.0d-27 * (300.0d0/Te)**1
 #
 #--------------------------------------------------------------------------------
 
-e + O2  => O^- + O                                 !   BOLSIG O2  -> O^- + O
-e + NO  => O^- + N                                 !   BOLSIG NO  -> O^- + N
-e + O3  => O^-  + O2                               !   BOLSIG O3  -> O^- + O2
-e + O3  => O2^- + O                                !   BOLSIG O3  -> O2^- + O
+# Previous Reaction: O2 -> O^- + O
+e + O2  => O^- + O                                 ! 6.4016d-13*Te**(6.5459d-1)*exp(-5.6834d4/Te)
+# Previous Reaction: NO -> O^- + N
+e + NO  => O^- + N                                 ! 6.3686d-13*Te**(3.3485d-1)*exp(-5.6675d4/Te)
+# Previous Reaction: O3 -> O^- + O2
+e + O3  => O^-  + O2                               ! 6.7850d-15*Te**(1.3448d0)*exp(-3.3419d2/Te)
+# Previous Reaction: O3 -> O2^- + O
+e + O3  => O2^- + O                                ! 1.6918d-8*Te**(-3.0807d-1)*exp(-7.9997d3/Te)
 #e + N2O => NO^- + N                                !   BOLSIG N2O -> NO^- + N
 
 #e + O2 + O2 => O2^- + O2                           !   BOLSIG O2 + O2 -> O2^- + O2

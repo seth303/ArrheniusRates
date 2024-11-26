@@ -1,6 +1,6 @@
 function [C, idxA,idxB,bolsigRxnsName] =  findBolsigRxns(reactionTable)
 % define filepaths
-reactionListFilepath = 'Raw QTPlasKin Analysis/ZDPlasKin FS Simulations/qt_reactions_list_bolsig.txt';
+reactionListFilepath = 'Raw QTPlasKin Analysis/ZDPlasKin_FS_Simulations/qt_reactions_list_bolsig.txt';
 
 % import reaction names
 varNames = readcell(reactionListFilepath);

@@ -10,7 +10,7 @@ forcedFit = 0;
 %% Step 3: Check If New Data Exists
 newReactionsToFit = checkForNewReactions(matchingChemistry,newData,combinedData,missingIdx);
 %% Step 3.1: Choose which reactions to review (optional)
-reviewFit = 1;
+reviewFit = 0;
 startIdx = 19;
 endIdx = 20;
 load("MASTER_reactionTable.mat");
@@ -20,7 +20,7 @@ load("MASTER_reactionTable.mat");
 idxA = idxA(sortIdx);
 C = C(sortIdx);
 %% Step 4: If so, Fit it
-saveData = 1;
+saveData = 0;
 if newReactionsToFit || forcedFit || reviewFit
     % options
     initialGuess = [9.71e-15 17e3 1.02];
