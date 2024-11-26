@@ -243,7 +243,7 @@ if strcmp(timescale,'fs')
     title('N2(C) Production Mechanism')
     grid on
      % N2(C) losses
-    RxnsNum = ["202","203","204","173"]';
+    RxnsNum = ["3","77","197"]';
     % DensityNum = ["21","11","11","12","12","12","14","14","39"];
     electronDensityNum = 56;
     iter = 1;
@@ -257,6 +257,11 @@ if strcmp(timescale,'fs')
         % arrheniusRates is a table with rates with units of cm^-3 s^-1
         n_arr =  table2array(arrheniusRates(:,rxn+1));
         disp(['Found Arrhenius Rate [1/(cm^3*s^3)] for reaction: ',char(arrheniusRates(:,rxn+1).Properties.VariableNames)])
+
+        % if rxn is the N2(E3), add them together
+        if rxn == 77
+            n_arr = n_arr +  table2array(arrheniusRates(:,78+1));
+        end
         % k_arr = n_arr./speciesDens_arr./elecDens_arr;
         plotTitle = char(arrheniusRates(:,rxn+1).Properties.VariableNames);
         % remove the 3 from C3
@@ -270,7 +275,7 @@ if strcmp(timescale,'fs')
     xlabel('Time [s]')
     ylabel('Reaction Rate [1/cm^3*s]')
     legend
-    title('N2(C) Loss Mechanism')
+    title('N2(C) Production Mechanism')
     grid on
     
 end
