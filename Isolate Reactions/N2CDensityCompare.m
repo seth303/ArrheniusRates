@@ -1,4 +1,4 @@
-clc; clear; close all;
+clc; clear; %close all;
 Delays0s = importSpectra('380nm/fs-Filament Spectra, Exposure 2 ns, Delay 0s.dat');
 Delays2s = importSpectra('380nm/fs-Filament Spectra, Exposure 2 ns, Delay 2 ns.dat');
 Delays4s = importSpectra('380nm/fs-Filament Spectra, Exposure 2 ns, Delay 4 ns.dat');
