@@ -243,7 +243,7 @@ if strcmp(timescale,'fs')
     title('N2(C) Production Mechanism')
     grid on
      % N2(C) losses
-    RxnsNum = ["202","203","204","173"]';
+    RxnsNum = ["202","203","173"]';
     % DensityNum = ["21","11","11","12","12","12","14","14","39"];
     electronDensityNum = 56;
     iter = 1;
