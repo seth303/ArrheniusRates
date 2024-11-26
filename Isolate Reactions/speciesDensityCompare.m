@@ -203,12 +203,15 @@ if strcmp(timescale,'fs')
     end
 
     % lgnd = legend('BOLSIG+ Error Region','Wilson Error Region', 'BOLSIG+ Global','Wilson Global');
-    lgnd = legend('N2(A)','N2(C3)','N4^+','N2','e-');
+    fsPlot.Children.XAxis.Exponent = -9;
+    lgnd = legend('N2(A)','N2(C)','N4^+','N2','e-');
     xlabel('Time [s]')
     ylabel('Density [cm^-3]')
+    title('Ivanov Novel Reactions')
     fontsize(20, "points")
     fsPlot.Children(2).YScale = 'log';
     xlim([0 10e-9])
+    
 
     % %
     % TL.Parent.WindowState = 'maximized';

@@ -21,7 +21,7 @@ if contains(arrheniusRatesBranch.WorkingFolder,'arrheniusRates')
     timescale = 'ns';
 end
 % fs
-if contains(arrheniusRatesBranch.WorkingFolder,'fsPostFilament') || contains(arrheniusRatesBranch.WorkingFolder,'Ivanov')
+if contains(arrheniusRatesBranch.WorkingFolder,'fsPostFilament')
     arrDensitiesFilePath =     strcat(arrheniusRatesBranch.WorkingFolder,'/Results/NRP_300um_300K_FIELD0.2/qt_densities.txt');
     speciesListFilepath =      strcat(arrheniusRatesBranch.WorkingFolder,'/Results/NRP_300um_300K_FIELD0.2/qt_species_list.txt');
     bolsigDensitiesFilePath =  strcat(mainBranch.WorkingFolder,'/Results/NRP_300um_1200K_FIELD0.02/qt_densities.txt');
@@ -30,6 +30,19 @@ if contains(arrheniusRatesBranch.WorkingFolder,'fsPostFilament') || contains(arr
     arrConditionsFilePath =    strcat(arrheniusRatesBranch.WorkingFolder,'/Results/NRP_300um_300K_FIELD0.2/qt_conditions.txt');
     arrConditionsListFilePath =    strcat(arrheniusRatesBranch.WorkingFolder,'/Results/NRP_300um_300K_FIELD0.2/qt_conditions_list.txt');
 
+
+    timescale = 'fs';
+end
+
+if contains(arrheniusRatesBranch.WorkingFolder,'Ivanov')
+    
+    arrDensitiesFilePath =     strcat(arrheniusRatesBranch.WorkingFolder,'/Results/NRP_300um_500K_FIELD0.2/qt_densities.txt');
+    speciesListFilepath =      strcat(arrheniusRatesBranch.WorkingFolder,'/Results/NRP_300um_500K_FIELD0.2/qt_species_list.txt');
+    bolsigDensitiesFilePath =  strcat(mainBranch.WorkingFolder,'/Results/NRP_300um_1200K_FIELD0.02/qt_densities.txt');
+    arrRatesFilepath =         strcat(arrheniusRatesBranch.WorkingFolder,'/Results/NRP_300um_500K_FIELD0.2/qt_rates.txt');
+    arrReactionListFilepath =  strcat(arrheniusRatesBranch.WorkingFolder,'/Results/NRP_300um_500K_FIELD0.2/qt_reactions_list.txt');
+    arrConditionsFilePath =    strcat(arrheniusRatesBranch.WorkingFolder,'/Results/NRP_300um_500K_FIELD0.2/qt_conditions.txt');
+    arrConditionsListFilePath =    strcat(arrheniusRatesBranch.WorkingFolder,'/Results/NRP_300um_500K_FIELD0.2/qt_conditions_list.txt');
 
     timescale = 'fs';
 end
@@ -190,12 +203,15 @@ if strcmp(timescale,'fs')
     end
 
     % lgnd = legend('BOLSIG+ Error Region','Wilson Error Region', 'BOLSIG+ Global','Wilson Global');
-    lgnd = legend('N2(A)','N2(C3)','N4^+','N2','e-');
+    fsPlot.Child
+    lgnd = legend('N2(A)','N2(C)','N4^+','N2','e-');
     xlabel('Time [s]')
     ylabel('Density [cm^-3]')
+    title('Ivanov Novel Reactions')
     fontsize(20, "points")
     fsPlot.Children(2).YScale = 'log';
     xlim([0 10e-9])
+    
 
     % %
     % TL.Parent.WindowState = 'maximized';
@@ -206,7 +222,7 @@ if strcmp(timescale,'fs')
 end
 
 %% Plotting indivdiual reaction rates
-close all
+% close all
 if strcmp(timescale,'fs')
     RxnsNum = ["3","77","197"]';
     % DensityNum = ["21","11","11","12","12","12","14","14","39"];
@@ -243,7 +259,7 @@ if strcmp(timescale,'fs')
     title('N2(C) Production Mechanism')
     grid on
      % N2(C) losses
-    RxnsNum = ["3","77","197"]';
+    RxnsNum = ["202","203","173"]';
     % DensityNum = ["21","11","11","12","12","12","14","14","39"];
     electronDensityNum = 56;
     iter = 1;
@@ -257,11 +273,6 @@ if strcmp(timescale,'fs')
         % arrheniusRates is a table with rates with units of cm^-3 s^-1
         n_arr =  table2array(arrheniusRates(:,rxn+1));
         disp(['Found Arrhenius Rate [1/(cm^3*s^3)] for reaction: ',char(arrheniusRates(:,rxn+1).Properties.VariableNames)])
-
-        % if rxn is the N2(E3), add them together
-        if rxn == 77
-            n_arr = n_arr +  table2array(arrheniusRates(:,78+1));
-        end
         % k_arr = n_arr./speciesDens_arr./elecDens_arr;
         plotTitle = char(arrheniusRates(:,rxn+1).Properties.VariableNames);
         % remove the 3 from C3
@@ -275,7 +286,7 @@ if strcmp(timescale,'fs')
     xlabel('Time [s]')
     ylabel('Reaction Rate [1/cm^3*s]')
     legend
-    title('N2(C) Production Mechanism')
+    title('N2(C) Loss Mechanism')
     grid on
     
 end
