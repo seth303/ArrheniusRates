@@ -1,0 +1,130 @@
+%% Import Table
+clc; clear; close all;
+% define the git repo
+mainBranch = gitrepo('main/');
+individualReactionsBranch = gitrepo('individualReactions/');
+
+pull(mainBranch)
+pull(individualReactionsBranch)
+individualReactionsBranch.LastCommit.Message
+
+
+currBranch = individualReactionsBranch.CurrentBranch.Name;
+% define filepaths
+arrDensitiesFilePath =     'individualReactions/Results/NRP_300um_1200K_FIELD0.02/qt_densities.txt';
+speciesListFilepath =      'individualReactions/Results/NRP_300um_1200K_FIELD0.02/qt_species_list.txt';
+bolsigDensitiesFilePath =  'main/Results/NRP_300um_1200K_FIELD0.02/qt_densities.txt';
+
+
+% ID import options, and set them
+opts = detectImportOptions(arrDensitiesFilePath);
+opts.VariableNamesLine = 1;
+opts.DataLines = [2 Inf];
+% import arrhenius densities
+T = readtable(arrDensitiesFilePath,opts);
+
+% import reaction names
+varNames = readcell(speciesListFilepath);
+varNames = [{0,'Time [s]'};varNames];
+% combine rates and reaction names
+T.Properties.VariableNames = varNames(:,2);
+% assign the table to the git repo structure
+data.(currBranch) = T;
+% extract the table (with the git repo as the name)
+struct2vars(data);
+% clear the old table and placeholder structure
+clear T data opts
+
+% import bolsig rates
+opts = detectImportOptions(bolsigDensitiesFilePath);
+opts.VariableNamesLine = 1;
+opts.DataLines = [2 Inf];
+T = readtable(bolsigDensitiesFilePath,opts);
+T.Properties.VariableNames = varNames(:,2);
+data.BOLSIG_Densities = T;
+struct2vars(data);
+% load master reaction table
+load ../MASTER_reactionTable.mat
+
+clear T data opts varNames
+
+%% Compare Differences
+clc;
+errorCounter = 0;
+startLooking =  1;
+for n = 1:size(individualReactions,2)
+
+    % find rows that are different:
+    row_different = find(~all(BOLSIG_Densities{startLooking:end,n} == individualReactions{startLooking:end,n},2));
+
+    % check if difference is less than some threshold
+    err = zeros(1,length(row_different));
+    for i = 1:length(row_different)
+        expected = table2array(BOLSIG_Densities(row_different(i),n));
+        actual = table2array(individualReactions(row_different(i),n));
+
+        err(i) = abs((actual-expected)/expected)*100;
+    end
+    [M,I] = max(err);
+    
+    if M > 10
+        errorCounter  = errorCounter + 1;
+        errorReactions(errorCounter) = n;
+        errorLocations(errorCounter) = row_different(I)+startLooking;
+        % disp(BOLSIG_Densities(row_different(I)-1:row_different(I)+1,[1, n]))
+        % disp(individualReactions(row_different(I)-1:row_different(I)+1,[1,n]))
+    else
+    end
+
+end
+%% Plot Differences
+time = table2array(BOLSIG_Densities(:,1));
+BOLSIG_Densities(:,errorReactions);
+individualReactions(:,errorReactions);
+close all;
+TL = tiledlayout;
+for i = 1:length(errorReactions)
+    nexttile;
+    % localIndex = (errorLocations(i)-5):(errorLocations(i)+5);
+    % 
+    % if max(localIndex) > size(BOLSIG_Densities,1)
+    %     truncate = find(localIndex >= size(BOLSIG_Densities,1), 1);
+    %     localIndex = localIndex(1:truncate);
+    % end
+    % localTime = time(localIndex);
+    BOLSIG = table2array(BOLSIG_Densities(:,errorReactions(i)));
+    Individual = table2array(individualReactions(:,errorReactions(i)));
+    % 
+    % plot(localTime,BOLSIG(localIndex),'*')
+    % hold on
+    % plot(localTime,Individual(localIndex), '^')
+    
+    plot(time,BOLSIG,'LineWidth',1)
+    hold on
+    plot(time,Individual,'LineWidth',2, 'LineStyle','--')
+    title(BOLSIG_Densities.Properties.VariableNames(errorReactions(i)))
+    grid on
+
+    
+end
+
+% lgnd = legend('BOLSIG+ Error Region','Wilson Error Region', 'BOLSIG+ Global','Wilson Global');
+lgnd = legend('BOLSIG+','Wilson');
+lgnd.Layout.Tile = 'north';
+xlabel(TL,'Time [s]')
+ylabel(TL,'Density [cm^-3]')
+fontsize(20, "points")
+
+
+
+
+for i = 1:length(TL.Children)
+    if isgraphics(TL.Children(i),'Axes')
+    % TL.Children(i).YScale = 'log';
+
+    end
+end
+TL.Parent.WindowState = 'maximized';
+pause(0.1)
+saveas(TL.Parent,individualReactionsBranch.LastCommit.Message,)
+

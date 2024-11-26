@@ -1,0 +1,20 @@
+[submodule "Raw QTPlasKin Analysis/ZDPlasKin_FS_Simulations"]
+	path = Raw QTPlasKin Analysis/ZDPlasKin_FS_Simulations
+	url = git@github.com:seth303/ZDPlasKin_FS_Simulations.git
+	branch = arrheniusRates
+[submodule "Isolate Reactions/arrheniusRates"]
+	path = Isolate Reactions/arrheniusRates
+	url = git@github.com:seth303/ZDPlasKin_FS_Simulations.git
+	branch = arrheniusRates
+[submodule "Isolate Reactions/fsPostFilament"]
+	path = Isolate Reactions/fsPostFilament
+	url = git@github.com:seth303/ZDPlasKin_FS_Simulations.git
+	branch = forcedConvergence
+[submodule "Isolate Reactions/Ivanov"]
+	path = Isolate Reactions/Ivanov
+	url = git@github.com:seth303/ZDPlasKin_FS_Simulations.git
+	branch = Ivanov
+[submodule "Isolate Reactions/main"]
+	path = Isolate Reactions/main
+	url = git@github.com:seth303/ZDPlasKin_FS_Simulations.git
+	branch = main
