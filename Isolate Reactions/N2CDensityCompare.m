@@ -6,8 +6,8 @@ Delays6s = importSpectra('380nm/fs-Filament Spectra, Exposure 2 ns, Delay 6 ns
 
 % ID import options, and set them
 arrheniusRatesBranch = gitrepo('Ivanov/');
-speciesListFilepath =      strcat(arrheniusRatesBranch.WorkingFolder,'/Results/NRP_300um_300K_FIELD0.2/qt_species_list.txt');
-arrDensitiesFilePath =     strcat(arrheniusRatesBranch.WorkingFolder,'/Results/NRP_300um_300K_FIELD0.2/qt_densities.txt');
+speciesListFilepath =      strcat(arrheniusRatesBranch.WorkingFolder,'/Results/NRP_300um_500K_FIELD0.2/qt_species_list.txt');
+arrDensitiesFilePath =     strcat(arrheniusRatesBranch.WorkingFolder,'/Results/NRP_300um_500K_FIELD0.2/qt_densities.txt');
 opts = detectImportOptions(arrDensitiesFilePath);
 opts.VariableNamesLine = 1;
 opts.DataLines = [2 Inf];

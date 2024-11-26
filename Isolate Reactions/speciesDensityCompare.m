@@ -21,7 +21,7 @@ if contains(arrheniusRatesBranch.WorkingFolder,'arrheniusRates')
     timescale = 'ns';
 end
 % fs
-if contains(arrheniusRatesBranch.WorkingFolder,'fsPostFilament') || contains(arrheniusRatesBranch.WorkingFolder,'Ivanov')
+if contains(arrheniusRatesBranch.WorkingFolder,'fsPostFilament')
     arrDensitiesFilePath =     strcat(arrheniusRatesBranch.WorkingFolder,'/Results/NRP_300um_300K_FIELD0.2/qt_densities.txt');
     speciesListFilepath =      strcat(arrheniusRatesBranch.WorkingFolder,'/Results/NRP_300um_300K_FIELD0.2/qt_species_list.txt');
     bolsigDensitiesFilePath =  strcat(mainBranch.WorkingFolder,'/Results/NRP_300um_1200K_FIELD0.02/qt_densities.txt');
@@ -30,6 +30,19 @@ if contains(arrheniusRatesBranch.WorkingFolder,'fsPostFilament') || contains(arr
     arrConditionsFilePath =    strcat(arrheniusRatesBranch.WorkingFolder,'/Results/NRP_300um_300K_FIELD0.2/qt_conditions.txt');
     arrConditionsListFilePath =    strcat(arrheniusRatesBranch.WorkingFolder,'/Results/NRP_300um_300K_FIELD0.2/qt_conditions_list.txt');
 
+
+    timescale = 'fs';
+end
+
+if contains(arrheniusRatesBranch.WorkingFolder,'Ivanov')
+    
+    arrDensitiesFilePath =     strcat(arrheniusRatesBranch.WorkingFolder,'/Results/NRP_300um_500K_FIELD0.2/qt_densities.txt');
+    speciesListFilepath =      strcat(arrheniusRatesBranch.WorkingFolder,'/Results/NRP_300um_500K_FIELD0.2/qt_species_list.txt');
+    bolsigDensitiesFilePath =  strcat(mainBranch.WorkingFolder,'/Results/NRP_300um_1200K_FIELD0.02/qt_densities.txt');
+    arrRatesFilepath =         strcat(arrheniusRatesBranch.WorkingFolder,'/Results/NRP_300um_500K_FIELD0.2/qt_rates.txt');
+    arrReactionListFilepath =  strcat(arrheniusRatesBranch.WorkingFolder,'/Results/NRP_300um_500K_FIELD0.2/qt_reactions_list.txt');
+    arrConditionsFilePath =    strcat(arrheniusRatesBranch.WorkingFolder,'/Results/NRP_300um_500K_FIELD0.2/qt_conditions.txt');
+    arrConditionsListFilePath =    strcat(arrheniusRatesBranch.WorkingFolder,'/Results/NRP_300um_500K_FIELD0.2/qt_conditions_list.txt');
 
     timescale = 'fs';
 end
@@ -206,7 +219,7 @@ if strcmp(timescale,'fs')
 end
 
 %% Plotting indivdiual reaction rates
-close all
+% close all
 if strcmp(timescale,'fs')
     RxnsNum = ["3","77","197"]';
     % DensityNum = ["21","11","11","12","12","12","14","14","39"];
