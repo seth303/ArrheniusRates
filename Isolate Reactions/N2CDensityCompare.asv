@@ -74,7 +74,7 @@ xlim([0 10e-9])
 % the values approach that of the experiment
 gateWidth = 2e-9;
 % cumulative sum of model
-Q = cumsum(Individual);
+Q = cumtrapz(Individual);
 Q = rescale(Q);
 % first datapoint
 experiment = n_N2C(1);
@@ -112,21 +112,8 @@ frame1 = rectplot(realDelay0-gateWidth, realDelay0);
 frame2 = rectplot(realDelay2-gateWidth, realDelay2);
 frame3 = rectplot(realDelay4-gateWidth, realDelay4);
 frame4 = rectplot(realDelay6-gateWidth, realDelay6);
-xlim([-2.1e-9 7e-9])
+xlim([-1e-9 7e-9])
 hold off
 
-frame1Integral = trapz(timeArrhenius(1:closestIndex_frame1),Individual(1:closestIndex_frame1));
-frame2Integral = trapz(timeArrhenius(closestIndex_frame1:closestIndex_frame2),Individual(closestIndex_frame1:closestIndex_frame2));
-frame3Integral = trapz(timeArrhenius(closestIndex_frame2:closestIndex_frame3),Individual(closestIndex_frame2:closestIndex_frame3));
-frame4Integral = trapz(timeArrhenius(closestIndex_frame3:closestIndex_frame4),Individual(closestIndex_frame3:closestIndex_frame4));
-
-% frame1Integral = sum(Individual(1:closestIndex_frame1));
-% frame2Integral = sum(Individual(closestIndex_frame1:closestIndex_frame2));
-% frame3Integral = sum(Individual(closestIndex_frame2:closestIndex_frame3));
-% frame4Integral = sum(Individual(closestIndex_frame3:closestIndex_frame4));
-
-framesIntegral = [frame1Integral frame2Integral frame3Integral frame4Integral];
-framesIntegral = rescale(framesIntegral);
-hold on
-plot(time_Experimental,framesIntegral, '-*','LineWidth',2, 'DisplayName','Integral')
-fill([0 0 0 0], [0 0 0 0],[0.4940 0.1840 0.5560], 'FaceAlpha',0.3, 'DisplayName','Frames')
+sum(Individual(1:closestIndex_frame1))
+sum(Individual(closestIndex_frame1:closestIndex_frame2))
