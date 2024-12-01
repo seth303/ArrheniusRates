@@ -10,9 +10,9 @@ forcedFit = 0;
 %% Step 3: Check If New Data Exists
 newReactionsToFit = checkForNewReactions(matchingChemistry,newData,combinedData,missingIdx);
 %% Step 3.1: Choose which reactions to review (optional)
-reviewFit = 0;
-startIdx = 19;
-endIdx = 20;
+reviewFit = 1;
+startIdx = 10;
+endIdx = 10;
 load("MASTER_reactionTable.mat");
 [C, idxA,idxB,bolsigRxnsName] =  findBolsigRxns(reactionTable);
 % sort
@@ -26,14 +26,14 @@ if newReactionsToFit || forcedFit || reviewFit
     initialGuess = [9.71e-15 17e3 1.02];
     overwriteIC = 0;
     saveFMinSearch = 0;
-    plotIntermediate = 0;
+    plotIntermediate = 1;
     silenceOutput = 0;
     plotMultipleEEDF = 0;
     fitType = 'inversegaussian';
-    plotTrapz = 0;
+    plotTrapz = 1;
     shiftFactor = 0;
     load('validFitTypes.mat')
-    upperLimit = 100;
+    upperLimit = 225;
 
     if ~ismember(fitType, validFitTypes) 
         disp('Valid Fit Types: ')
