@@ -2,9 +2,9 @@
 clc; clear; %close all;
 % define the git repo
 mainBranch = gitrepo('main/');
-% arrheniusRatesBranch = gitrepo('arrheniusRates/');
+arrheniusRatesBranch = gitrepo('arrheniusRates/');
 % arrheniusRatesBranch = gitrepo('fsPostFilament/');
-arrheniusRatesBranch = gitrepo('Ivanov/');
+% arrheniusRatesBranch = gitrepo('Ivanov/');
 
 
 % pull(mainBranch)
@@ -30,12 +30,37 @@ if contains(arrheniusRatesBranch.WorkingFolder,'fsPostFilament')
     arrConditionsFilePath =    strcat(arrheniusRatesBranch.WorkingFolder,'/Results/NRP_300um_300K_FIELD0.2/qt_conditions.txt');
     arrConditionsListFilePath =    strcat(arrheniusRatesBranch.WorkingFolder,'/Results/NRP_300um_300K_FIELD0.2/qt_conditions_list.txt');
 
+    % ID import options, and set them
+    opts = detectImportOptions(arrConditionsFilePath);
+    opts.VariableNamesLine = 1;
+    opts.DataLines = [2 Inf];
+    % import arrhenius rates
+    arrheniusConditions = readtable(arrConditionsFilePath,opts);
+
+    % import condititons names
+    arrheniusConditions.Properties.VariableNames(2) = {'Reduced field [Td]'};
+    arrheniusConditions.Properties.VariableNames(3) = {'Gas temperature [K]'};
+    arrheniusConditions.Properties.VariableNames(4) = {'Electron temperature [K]'};
+
+    % ID import options, and set them
+    opts = detectImportOptions(arrRatesFilepath);
+    opts.VariableNamesLine = 1;
+    opts.DataLines = [2 Inf];
+    % import arrhenius rates
+    arrheniusRates = readtable(arrRatesFilepath,opts);
+
+    % import reaction names
+    varNames = readcell(arrReactionListFilepath);
+    varNames = [{0,'Time [s]'};varNames];
+    varNames = addSuffixToDuplicates(varNames);
+    % combine rates and reaction names
+    arrheniusRates.Properties.VariableNames = varNames(:,2);
 
     timescale = 'fs';
 end
 
 if contains(arrheniusRatesBranch.WorkingFolder,'Ivanov')
-    
+
     arrDensitiesFilePath =     strcat(arrheniusRatesBranch.WorkingFolder,'/Results/NRP_300um_500K_FIELD0.2/qt_densities.txt');
     speciesListFilepath =      strcat(arrheniusRatesBranch.WorkingFolder,'/Results/NRP_300um_500K_FIELD0.2/qt_species_list.txt');
     bolsigDensitiesFilePath =  strcat(mainBranch.WorkingFolder,'/Results/NRP_300um_1200K_FIELD0.02/qt_densities.txt');
@@ -44,34 +69,38 @@ if contains(arrheniusRatesBranch.WorkingFolder,'Ivanov')
     arrConditionsFilePath =    strcat(arrheniusRatesBranch.WorkingFolder,'/Results/NRP_300um_500K_FIELD0.2/qt_conditions.txt');
     arrConditionsListFilePath =    strcat(arrheniusRatesBranch.WorkingFolder,'/Results/NRP_300um_500K_FIELD0.2/qt_conditions_list.txt');
 
+    % ID import options, and set them
+    opts = detectImportOptions(arrConditionsFilePath);
+    opts.VariableNamesLine = 1;
+    opts.DataLines = [2 Inf];
+    % import arrhenius rates
+    arrheniusConditions = readtable(arrConditionsFilePath,opts);
+
+    % import condititons names
+    arrheniusConditions.Properties.VariableNames(2) = {'Reduced field [Td]'};
+    arrheniusConditions.Properties.VariableNames(3) = {'Gas temperature [K]'};
+    arrheniusConditions.Properties.VariableNames(4) = {'Electron temperature [K]'};
+
+    % ID import options, and set them
+    opts = detectImportOptions(arrRatesFilepath);
+    opts.VariableNamesLine = 1;
+    opts.DataLines = [2 Inf];
+    % import arrhenius rates
+    arrheniusRates = readtable(arrRatesFilepath,opts);
+
+    % import reaction names
+    varNames = readcell(arrReactionListFilepath);
+    varNames = [{0,'Time [s]'};varNames];
+    varNames = addSuffixToDuplicates(varNames);
+    % combine rates and reaction names
+    arrheniusRates.Properties.VariableNames = varNames(:,2);
+
     timescale = 'fs';
 end
 
-% ID import options, and set them
-opts = detectImportOptions(arrConditionsFilePath);
-opts.VariableNamesLine = 1;
-opts.DataLines = [2 Inf];
-% import arrhenius rates
-arrheniusConditions = readtable(arrConditionsFilePath,opts);
 
-% import condititons names
-arrheniusConditions.Properties.VariableNames(2) = {'Reduced field [Td]'};
-arrheniusConditions.Properties.VariableNames(3) = {'Gas temperature [K]'};
-arrheniusConditions.Properties.VariableNames(4) = {'Electron temperature [K]'};
 
-% ID import options, and set them
-opts = detectImportOptions(arrRatesFilepath);
-opts.VariableNamesLine = 1;
-opts.DataLines = [2 Inf];
-% import arrhenius rates
-arrheniusRates = readtable(arrRatesFilepath,opts);
 
-% import reaction names
-varNames = readcell(arrReactionListFilepath);
-varNames = [{0,'Time [s]'};varNames];
-varNames = addSuffixToDuplicates(varNames);
-% combine rates and reaction names
-arrheniusRates.Properties.VariableNames = varNames(:,2);
 
 % ID import options, and set them
 opts = detectImportOptions(arrDensitiesFilePath);
@@ -133,7 +162,7 @@ if strcmp(timescale,'ns')
     close all;
     figure;
     TL = tiledlayout;
-    errorReactions = 1:1:56;
+    % errorReactions = 1:1:56;
     % Nitrogen Reactions: 1-11
     % Oxygen Reactions: 12-27
     % Combo Reactions: 28-41
@@ -211,7 +240,7 @@ if strcmp(timescale,'fs')
     fontsize(20, "points")
     fsPlot.Children(2).YScale = 'log';
     xlim([0 10e-9])
-    
+
 
     % %
     % TL.Parent.WindowState = 'maximized';
@@ -258,7 +287,7 @@ if strcmp(timescale,'fs')
     legend
     title('N2(C) Production Mechanism')
     grid on
-     % N2(C) losses
+    % N2(C) losses
     RxnsNum = ["202","203","173"]';
     % DensityNum = ["21","11","11","12","12","12","14","14","39"];
     electronDensityNum = 56;
@@ -288,5 +317,5 @@ if strcmp(timescale,'fs')
     legend
     title('N2(C) Loss Mechanism')
     grid on
-    
+
 end
